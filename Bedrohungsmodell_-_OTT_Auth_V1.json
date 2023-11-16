@@ -1,0 +1,1330 @@
+{
+  "summary": {
+    "title": "Bedrohungsmodell - OTT Auth",
+    "owner": "Firma Allsecure",
+    "description": "Die Firma Allsecure betreibt unterschiedliche Anwendungen mit Hilfe einer 2-Faktorauthentifizierung via One-time token, der an das entsprechende Smartphone des Nutzers geschickt wird."
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "Georg Neugebauer",
+        "$$hashKey": "object:14"
+      },
+      {
+        "name": "DevSecOps Kursteilnehmer",
+        "$$hashKey": "object:16"
+      }
+    ],
+    "diagrams": [
+      {
+        "cells": [
+          {
+            "position": {
+              "x": 1222,
+              "y": -445.00000000000017
+            },
+            "size": {
+              "width": 310,
+              "height": 150
+            },
+            "shape": "trust-boundary-box",
+            "attrs": {
+              "headerText": {
+                "text": "Externe Email Server des Managements"
+              }
+            },
+            "zIndex": -1,
+            "id": "12b54582-92f6-4583-9618-cffdf156de42",
+            "data": {
+              "type": "tm.BoundaryBox",
+              "name": "Externe Email Server des Managements",
+              "description": "",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false
+            }
+          },
+          {
+            "position": {
+              "x": 22,
+              "y": 48.000000000000085
+            },
+            "size": {
+              "width": 160,
+              "height": 80
+            },
+            "attrs": {
+              "text": {
+                "text": "User"
+              },
+              "body": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "actor",
+            "zIndex": 1,
+            "id": "dec51efb-bf55-4b9c-a294-0e45f4e823f6",
+            "data": {
+              "name": "User",
+              "description": "",
+              "type": "tm.Process",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "threats": [
+                {
+                  "id": "6a5e1dea-c469-4a3d-a0a8-56041c87e241",
+                  "title": "Nutzer wird auf Falsche Seite gelockt",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "(CAPEC 156) ( Angriffs Taktik: https://attack.mitre.org/techniques/T1566/)\nD(6)R(8)E(9)A(6)D(8) -> 37/50 -> High.\nEin Nutzer wird durch eine Fake Email auf eine Ähnlich aussehende Seite gelockt, und dort dazu aufgefordert seine Login Credentials ein zu geben.",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 106,
+                  "score": "37"
+                },
+                {
+                  "id": "3fcaa338-7432-44b4-987a-aacdfe1f7737",
+                  "title": "Nutzer erhält Root zugriff auf Service via Session Tokens",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Elevation of privilege",
+                  "description": "(CAPEC 152)  (Angriffs Taktik:https://attack.mitre.org/techniques/T1539/)\nD(10)R(3)E(6)A(8)D(4) -> 31/50 -> Medium .\nDer Nutzer kann sich Root zugriff aufgrund von nicht Randomisierten Session Tokens verschaffen, in dem er durch ausprobieren das Token eines höher Priviligierten Nutzers rät, und übernimmt.",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 110,
+                  "score": "31"
+                }
+              ],
+              "hasOpenThreats": true,
+              "providesAuthentication": false
+            }
+          },
+          {
+            "position": {
+              "x": 280,
+              "y": -1.9999999999999147
+            },
+            "size": {
+              "width": 130,
+              "height": 130
+            },
+            "attrs": {
+              "text": {
+                "text": "Login System -\nWebapp +\nMobile App"
+              },
+              "body": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "zIndex": 2,
+            "id": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa",
+            "data": {
+              "name": "Login System -\nWebapp +\nMobile App",
+              "description": "",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "threats": [
+                {
+                  "id": "f38bff26-8024-44ec-b4b8-cacfb381e2d0",
+                  "title": "DDOS auf den Login Service",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Denial of service",
+                  "description": "(CAPEC 469) (Angriffs Technik: https://attack.mitre.org/techniques/T1498/)\nD(9)R(10)E(9)A(10)D(10) -> 48/50 -> High.\nEin Botnetzt stellt vielfache Anfragen an den Login Service, welche aufgrund der bearbeitungszeit des OTT für einige Zeit offen bleiben, und dadurch den Server überlasten",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 103,
+                  "score": "48"
+                }
+              ],
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false
+            }
+          },
+          {
+            "position": {
+              "x": 488,
+              "y": -11.999999999999922
+            },
+            "size": {
+              "width": 130,
+              "height": 140
+            },
+            "attrs": {
+              "text": {
+                "text": "2-Faktor-Authe\nntifizierungsdi\nenst"
+              },
+              "body": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "zIndex": 3,
+            "id": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c",
+            "data": {
+              "name": "2-Faktor-Authe\nntifizierungsdi\nenst",
+              "description": "",
+              "type": "tm.Flow",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "threats": [
+                {
+                  "id": "b54abbda-4a88-4e74-8fee-addbef309ccf",
+                  "title": "Manipilation der OTT Token",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": "Denial of service",
+                  "description": "(CAPEC: evtl. 124) (Angriffstechnik: evtl https://attack.mitre.org/techniques/T1134/)\nD(6)R(2)E(2)A(2)D(1) -> 13/50 -> Low\nJemand verschafft sich Zugriff auf den OTT erzeugungsprozess, und leitet falsche OTT Tokens weiter (wohingegen die Original Tokens unverändert bleiben). Welche dann einem Nutzer den Login verwähren",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 114,
+                  "score": "13"
+                }
+              ],
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "1. Auth Challenge",
+              "description": "",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": [],
+              "isTrustBoundary": false
+            },
+            "id": "35f9f840-c060-4c31-bf9a-0e17a95ddf66",
+            "labels": [
+              {
+                "position": 0.5,
+                "attrs": {
+                  "label": {
+                    "text": "Login"
+                  }
+                }
+              }
+            ],
+            "source": {
+              "cell": "dec51efb-bf55-4b9c-a294-0e45f4e823f6"
+            },
+            "target": {
+              "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa"
+            },
+            "vertices": [
+              {
+                "x": 200,
+                "y": 64.5
+              },
+              {
+                "x": 237,
+                "y": 39
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Erwarteter OTT",
+              "description": "",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": [],
+              "isTrustBoundary": false
+            },
+            "id": "2503a360-01b6-4464-b35f-42c6fb583348",
+            "labels": [
+              {
+                "position": 0.5,
+                "attrs": {
+                  "label": {
+                    "text": "1. Auth Challenge"
+                  }
+                }
+              }
+            ],
+            "source": {
+              "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa"
+            },
+            "target": {
+              "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
+            },
+            "vertices": [
+              {
+                "x": 440,
+                "y": -10
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "2. Weiterleitung\nTelefonnummer",
+              "description": "",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": [],
+              "isTrustBoundary": false
+            },
+            "id": "63356151-e316-4a82-8224-9a7c729cfbee",
+            "labels": [
+              {
+                "position": 0.5,
+                "attrs": {
+                  "label": {
+                    "text": "Erwarteter OTT"
+                  }
+                }
+              }
+            ],
+            "source": {
+              "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
+            },
+            "target": {
+              "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa"
+            },
+            "vertices": []
+          },
+          {
+            "shape": "trust-broundary-curve",
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Boundary",
+              "name": "Externer Service für T\nelefonnummernauflö\nsung",
+              "description": "",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false
+            },
+            "id": "8c690a8a-f100-4c4d-bd88-095a530ac220",
+            "labels": [
+              {
+                "position": {
+                  "distance": 0,
+                  "offset": 25.336937022630487
+                },
+                "attrs": {
+                  "label": {
+                    "text": "Firma Allsecure"
+                  }
+                }
+              }
+            ],
+            "source": {
+              "x": 241,
+              "y": 135
+            },
+            "target": {
+              "x": 246,
+              "y": 138
+            },
+            "vertices": [
+              {
+                "x": 590,
+                "y": 470
+              },
+              {
+                "x": 1130,
+                "y": 470
+              },
+              {
+                "x": 1380,
+                "y": 340
+              },
+              {
+                "x": 1360,
+                "y": -50
+              },
+              {
+                "x": 710,
+                "y": -430
+              },
+              {
+                "x": 270,
+                "y": -350
+              },
+              {
+                "x": 243,
+                "y": -8
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Log(Login, OTT, Phone Number)",
+              "description": "",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "81c8482c-19ed-41ab-bae2-a5561223b4b5",
+            "labels": [
+              "Log(Login, OTT, Phone Number)"
+            ],
+            "source": {
+              "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
+            },
+            "target": {
+              "cell": "c2716661-ef88-48a8-8d0f-724e1923d562"
+            },
+            "vertices": [
+              {
+                "x": 559.5,
+                "y": -60
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Email Versand Management Report",
+              "description": "",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "19736471-f243-493e-adb9-7140d432804a",
+            "labels": [
+              "Email Versand Management Report"
+            ],
+            "source": {
+              "cell": "7c77b9f0-59c8-4063-803e-62f7e87149f7"
+            },
+            "target": {
+              "cell": "84036bdb-4d0a-404f-8dcf-df4d02f4847e"
+            },
+            "vertices": [
+              {
+                "x": 820,
+                "y": -350
+              },
+              {
+                "x": 1030,
+                "y": -350
+              },
+              {
+                "x": 1160,
+                "y": -400
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Email Versand Wöchentlicher SIEM Report",
+              "description": "Der Verschlüsselt, und signierte Wöchentliche SIEM Report ans Management",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "2c73ab3b-d27f-4a6d-a877-16faed00accf",
+            "labels": [
+              "Email Versand Wöchentlicher SIEM Report"
+            ],
+            "source": {
+              "cell": "a57e2e02-ce92-4d6e-9917-43fbc76704e7"
+            },
+            "target": {
+              "cell": "84036bdb-4d0a-404f-8dcf-df4d02f4847e"
+            },
+            "vertices": [
+              {
+                "x": 1080,
+                "y": -60
+              },
+              {
+                "x": 1140,
+                "y": -80
+              },
+              {
+                "x": 1290,
+                "y": -170
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Gesammelte OTT Daten",
+              "description": "",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "07d2a693-acfc-42a1-9f16-baeba606882c",
+            "labels": [
+              "Gesammelte OTT Daten"
+            ],
+            "source": {
+              "cell": "c2716661-ef88-48a8-8d0f-724e1923d562"
+            },
+            "target": {
+              "cell": "7c77b9f0-59c8-4063-803e-62f7e87149f7"
+            },
+            "vertices": [
+              {
+                "x": 680,
+                "y": -170
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Log Daten",
+              "description": "Die Log Daten des Dienstes",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "e10d95df-8f47-4710-a74e-9b5c2176f6d8",
+            "labels": [
+              "Log Daten"
+            ],
+            "source": {
+              "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
+            },
+            "target": {
+              "cell": "a57e2e02-ce92-4d6e-9917-43fbc76704e7"
+            },
+            "vertices": [
+              {
+                "x": 720,
+                "y": 40
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Log Daten",
+              "description": "Die Log Daten des Dienstes",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "b3f5235d-986d-4cc5-9969-afc0ef39a491",
+            "labels": [
+              "Log Daten"
+            ],
+            "source": {
+              "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa"
+            },
+            "target": {
+              "cell": "a57e2e02-ce92-4d6e-9917-43fbc76704e7"
+            },
+            "vertices": [
+              {
+                "x": 560,
+                "y": 160
+              },
+              {
+                "x": 700,
+                "y": 160
+              },
+              {
+                "x": 800,
+                "y": 120
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Log Daten",
+              "description": "Die Log Daten des Dienstes",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "a78e3f63-2ba0-4b33-ac33-3d674b83b8a4",
+            "labels": [
+              "Log Daten"
+            ],
+            "source": {
+              "cell": "73afd2f3-acd3-4a41-a434-91a00061cb15"
+            },
+            "target": {
+              "cell": "a57e2e02-ce92-4d6e-9917-43fbc76704e7"
+            },
+            "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "2. OTT Request weiterleitung \nfür Account",
+              "description": "Leitet den OTT Request sowie den Nutzeraccount weiter",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "062491a4-ae3a-4730-b675-9f5ab596af4c",
+            "labels": [
+              "2. OTT Request weiterleitung \nfür Account"
+            ],
+            "source": {
+              "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
+            },
+            "target": {
+              "cell": "73afd2f3-acd3-4a41-a434-91a00061cb15"
+            },
+            "vertices": [
+              {
+                "x": 680,
+                "y": 65
+              },
+              {
+                "x": 760,
+                "y": 110
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "4. OTT",
+              "description": "Sendet an einen,  vom User angegebene Schnittstelle (Phone, App, Email, etc), dass OTT Token ",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "635ca92d-278f-44c6-b167-80052778de1f",
+            "labels": [
+              "4. OTT"
+            ],
+            "source": {
+              "cell": "73afd2f3-acd3-4a41-a434-91a00061cb15"
+            },
+            "target": {
+              "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa"
+            },
+            "vertices": [
+              {
+                "x": 850,
+                "y": 350
+              },
+              {
+                "x": 650,
+                "y": 350
+              },
+              {
+                "x": 560,
+                "y": 330
+              },
+              {
+                "x": 480,
+                "y": 250
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "3. Sucht für Nutzer Authentifizierungsmethode",
+              "description": "Prüft für einen gegebenen Nutzer die Authentifizierungsmethode. Und gibt diese an den Mobile OTT Dienst zurück",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "7e10a9bb-75e2-4fe8-806c-15578378dc8d",
+            "labels": [
+              "3. Sucht für Nutzer Authentifizierungsmethode"
+            ],
+            "source": {
+              "cell": "73afd2f3-acd3-4a41-a434-91a00061cb15"
+            },
+            "target": {
+              "cell": "fe71b615-ce44-45f1-9dc9-2e628bcb6be0"
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Data Flow",
+              "description": "",
+              "outOfScope": false,
+              "isBidirectional": false,
+              "reasonOutOfScope": "",
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "hasOpenThreats": false,
+              "threats": []
+            },
+            "id": "a8b903e4-377d-484b-986b-cb8b63385ce5",
+            "source": {
+              "cell": "fe71b615-ce44-45f1-9dc9-2e628bcb6be0"
+            },
+            "target": {
+              "cell": "73afd2f3-acd3-4a41-a434-91a00061cb15"
+            }
+          },
+          {
+            "position": {
+              "x": 410,
+              "y": -174
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Log-DB"
+              },
+              "topLine": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "zIndex": 11,
+            "id": "c2716661-ef88-48a8-8d0f-724e1923d562",
+            "data": {
+              "type": "tm.Store",
+              "name": "Log-DB",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "isALog": true,
+              "storesCredentials": false,
+              "isEncrypted": true,
+              "isSigned": true,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "be0fe5fa-47a3-4ebc-b714-119ee5748b4c",
+                  "title": "Veränderung von Log Daten",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": "Tampering",
+                  "description": "(CAPEC: 268) (Angriffs Technik: https://attack.mitre.org/techniques/T1565/ )\nD(3)R(3)E(1)A(8)D(1) -> 16/50 -> Low\nJemand könnte log Daten hinzufügen oder löschen, in dem er/sie Physischen Zugriff auf das System bekommt, und auch schriebrechte auf diesem.",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 102,
+                  "score": "16"
+                },
+                {
+                  "id": "df274aaa-369f-4c33-a260-55a67cd16db2",
+                  "title": "Logs werden nicht korrekt erzeugt",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Repudiation",
+                  "description": "CAPEC(538). Attack Technik: https://attack.mitre.org/techniques/T1195/002/\nD(8)R(2)E(1)A(6)D(2) -> 19/50 -> Medium\nLogs werden aufgrund einer Manipulierten/Fehlerhaften Datenbank Schittstellen Implementation innerhalb der Datenbank nicht immer (korrekt) erzeugt. Aka. die Datenbank Schnittstelle wurde entweder manipuliert, oder es wurde eine fehlerhafte Datenbank Schnittstelle benutzt.",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 108,
+                  "score": "19"
+                }
+              ]
+            }
+          },
+          {
+            "position": {
+              "x": 488,
+              "y": -400.00000000000017
+            },
+            "size": {
+              "width": 300,
+              "height": 140
+            },
+            "attrs": {
+              "text": {
+                "text": "Management Report \nDienst\n(Monatlich)"
+              },
+              "body": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "zIndex": 14,
+            "id": "7c77b9f0-59c8-4063-803e-62f7e87149f7",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Management Report \nDienst\n(Monatlich)",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "privilegeLevel": "",
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "439ecc23-56e9-4f85-898d-4b20440d65cf",
+                  "title": "Via Email übermittelten Reports sind unverschlüsselt",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "(CAPEC: 94) (Attack Technik: https://attack.mitre.org/techniques/T1557/ )\nD(8)R(6)E(6)A(8)D(8) -> 36/50 -> High\nDie via Email versendeten Management Reporst sind nur signiert, aber nicht verschlüsselt. Aka. nutzer könnten via Man-In-The Middle diese entweder abfangen, oder direkt im erzeugenden System auslesen, wenn diese Zugriff darauf haben.",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 111,
+                  "score": "36"
+                }
+              ],
+              "isBidirectional": false,
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false
+            }
+          },
+          {
+            "position": {
+              "x": 1300,
+              "y": -400.00000000000017
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Management Email Server"
+              },
+              "topLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "zIndex": 15,
+            "id": "84036bdb-4d0a-404f-8dcf-df4d02f4847e",
+            "data": {
+              "type": "tm.Store",
+              "name": "Management Email Server",
+              "description": "Die an das Management gesendeten Reports (via Email). ((Verschlüsselt) und Signiert)",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "isALog": false,
+              "storesCredentials": false,
+              "isEncrypted": true,
+              "isSigned": true,
+              "hasOpenThreats": false,
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": 830,
+              "y": -80
+            },
+            "size": {
+              "width": 100,
+              "height": 110
+            },
+            "attrs": {
+              "text": {
+                "text": "SIEM-System"
+              },
+              "body": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "zIndex": 16,
+            "id": "a57e2e02-ce92-4d6e-9917-43fbc76704e7",
+            "data": {
+              "type": "tm.Flow",
+              "name": "SIEM-System",
+              "description": "Überwacht und logt alle Security relevanten Prozesse",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "privilegeLevel": "",
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "1766fc14-111c-4ddb-8f24-e56d961d4d80",
+                  "title": "Standart Passwörter",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "(CAPEC: 70) (Angriffs Technik: https://attack.mitre.org/techniques/T0812/ )\nD(10)R(10)E(10)A(8)D(6)(Leicht zu Discovern, wenn man erstmal zugriff zum SIEM hat) -> 44/50->High\nJemand erhält zugriff auf das SIEM durch einen default Login. Und kann nun informationen über die vom SIEM überwachten Systeme auslesen.",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 115,
+                  "score": "44"
+                }
+              ],
+              "isBidirectional": false,
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false
+            }
+          },
+          {
+            "position": {
+              "x": 1092,
+              "y": 260
+            },
+            "size": {
+              "width": 130,
+              "height": 130
+            },
+            "attrs": {
+              "text": {
+                "text": "Allsecure Mobile \nPhone OTT"
+              },
+              "body": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "zIndex": 17,
+            "id": "73afd2f3-acd3-4a41-a434-91a00061cb15",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Allsecure Mobile \nPhone OTT",
+              "description": "Erhält einen OTT, sowie den zugehörigen Nutzeraccount, und fragt in der Datenbank nach den für den Account bekannten Authentifizierungsmethoden(Phone,App,Email, etc) . Diese werden dann als Ziel für den OTT Request genutzt",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "privilegeLevel": "",
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "369f5b03-1a97-438a-8c87-693b386f4325",
+                  "title": "Ein Mitarbeiter fängt die OTT und Userrequests ab",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "description": "(CAPEC: 94) (Attack Technik: https://attack.mitre.org/techniques/T1557/ )\nD(7)R(6)E(4)A(6)D(2) -> 25/50 -> Medium\nEin Angreifer vorort greift auf das System zu und liest den Traffic wie OTT Requests etc mit.\nDurchs mitlesen erhält er informationen welcher Nutzer exestieren, wie diese zu erreichen sind.",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 101,
+                  "score": "25"
+                }
+              ],
+              "isBidirectional": false,
+              "protocol": "",
+              "isEncrypted": false,
+              "isPublicNetwork": false
+            }
+          },
+          {
+            "position": {
+              "x": 1236,
+              "y": 68.00000000000009
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Authentifizierungs Datenbank"
+              },
+              "topLine": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "zIndex": 18,
+            "id": "fe71b615-ce44-45f1-9dc9-2e628bcb6be0",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Authentifizierungs Datenbank",
+              "description": "Die Datenbank die Nutzernamen mit ihren zugehörigen angegebenen Authentifizierungsmethoden speichert. ",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "isALog": false,
+              "storesCredentials": false,
+              "isEncrypted": false,
+              "isSigned": false,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "4c102e8c-866f-4c32-84b0-d974a57abb62",
+                  "title": "Default login",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "(CAPEC: 70) (Angriffs Technik: https://attack.mitre.org/techniques/T0812/ )\nD(6)R(10)E(9)A(8)D(6)(Leicht zu Discovern, wenn Zugriff auf Datenbank exestiert) -> 39/50->high\nEin Angreifer bekommt zugriff auf die Datenbank durch standart login credentials",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 113,
+                  "score": "39"
+                }
+              ],
+              "isBidirectional": false,
+              "protocol": "",
+              "isPublicNetwork": false
+            }
+          }
+        ],
+        "version": "2.1.1",
+        "title": "Architekturdiagramm",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "id": 0,
+        "diagramType": "STRIDE"
+      }
+    ],
+    "reviewer": "Georg Neugebauer",
+    "diagramTop": 10,
+    "threatTop": 115
+  },
+  "version": "2.1.1"
+}
